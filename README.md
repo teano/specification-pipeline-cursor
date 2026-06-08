@@ -92,6 +92,10 @@ Copy-Item -Path ".\skills\skill-specification-pipeline" `
 git clone https://github.com/teano/specification-pipeline-cursor.git "$env:USERPROFILE\.cursor"
 ```
 
+```bat
+git clone https://github.com/teano/specification-pipeline-cursor.git "%USERPROFILE%\.cursor"
+```
+
 Этот способ подходит, если `%USERPROFILE%\.cursor` еще не существует или пустая.
 Если в глобальной папке Cursor уже есть ваши команды, rules или другие skills,
 `git clone` в эту папку не подойдет: Git не клонирует в непустой каталог, а
@@ -108,10 +112,23 @@ Copy-Item "$env:TEMP\specification-pipeline-cursor\commands\command-specificatio
 Copy-Item "$env:TEMP\specification-pipeline-cursor\skills\skill-specification-pipeline" "$env:USERPROFILE\.cursor\skills" -Recurse -Force
 ```
 
+```bat
+git clone https://github.com/teano/specification-pipeline-cursor.git "%TEMP%\specification-pipeline-cursor"
+if not exist "%USERPROFILE%\.cursor\commands" mkdir "%USERPROFILE%\.cursor\commands"
+if not exist "%USERPROFILE%\.cursor\skills" mkdir "%USERPROFILE%\.cursor\skills"
+copy /Y "%TEMP%\specification-pipeline-cursor\commands\command-specification.md" "%USERPROFILE%\.cursor\commands\command-specification.md"
+copy /Y "%TEMP%\specification-pipeline-cursor\commands\command-specification-help.md" "%USERPROFILE%\.cursor\commands\command-specification-help.md"
+xcopy /E /I /Y "%TEMP%\specification-pipeline-cursor\skills\skill-specification-pipeline" "%USERPROFILE%\.cursor\skills\skill-specification-pipeline"
+```
+
 Обновление при прямом clone в `.cursor`:
 
 ```powershell
 git -C "$env:USERPROFILE\.cursor" pull
+```
+
+```bat
+git -C "%USERPROFILE%\.cursor" pull
 ```
 
 При установке через временный checkout повторите копирование после `git pull`.
