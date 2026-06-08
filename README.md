@@ -52,6 +52,8 @@ Skill entrypoint:
 2. Скопируйте `commands/` и `skills/skill-specification-pipeline/` в глобальную
    пользовательскую папку Cursor:
 
+PowerShell:
+
 ```powershell
 $cursorHome = Join-Path $env:USERPROFILE ".cursor"
 
@@ -88,9 +90,13 @@ Copy-Item -Path ".\skills\skill-specification-pipeline" `
 Репозиторий уже повторяет структуру глобальной папки Cursor (`commands/` и
 `skills/`), поэтому самый прямой вариант такой:
 
+PowerShell:
+
 ```powershell
 git clone https://github.com/teano/specification-pipeline-cursor.git "$env:USERPROFILE\.cursor"
 ```
+
+cmd.exe:
 
 ```bat
 git clone https://github.com/teano/specification-pipeline-cursor.git "%USERPROFILE%\.cursor"
@@ -104,6 +110,8 @@ git clone https://github.com/teano/specification-pipeline-cursor.git "%USERPROFI
 В таком случае используйте отдельный checkout и скопируйте файлы в глобальное
 пространство Cursor:
 
+PowerShell:
+
 ```powershell
 git clone https://github.com/teano/specification-pipeline-cursor.git "$env:TEMP\specification-pipeline-cursor"
 
@@ -111,6 +119,8 @@ Copy-Item "$env:TEMP\specification-pipeline-cursor\commands\command-specificatio
 Copy-Item "$env:TEMP\specification-pipeline-cursor\commands\command-specification-help.md" "$env:USERPROFILE\.cursor\commands\command-specification-help.md" -Force
 Copy-Item "$env:TEMP\specification-pipeline-cursor\skills\skill-specification-pipeline" "$env:USERPROFILE\.cursor\skills" -Recurse -Force
 ```
+
+cmd.exe:
 
 ```bat
 git clone https://github.com/teano/specification-pipeline-cursor.git "%TEMP%\specification-pipeline-cursor"
@@ -123,9 +133,13 @@ xcopy /E /I /Y "%TEMP%\specification-pipeline-cursor\skills\skill-specification-
 
 Обновление при прямом clone в `.cursor`:
 
+PowerShell:
+
 ```powershell
 git -C "$env:USERPROFILE\.cursor" pull
 ```
+
+cmd.exe:
 
 ```bat
 git -C "%USERPROFILE%\.cursor" pull
